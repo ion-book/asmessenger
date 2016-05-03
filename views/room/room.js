@@ -5,6 +5,7 @@ angular.module('App').controller('RoomsCtrl', function ($scope, Rooms, Chats, $s
     console.log($scope.rooms);
 
     $scope.openChatRoom = function (roomId) {
+        console.log("roomId" + roomId);
         $state.go('chat', {
             roomId: roomId
         });

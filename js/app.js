@@ -25,7 +25,10 @@ $stateProvider
     .state('chat', {
       url: '/chat',
       templateUrl: 'views/chat/chat.html',
-      controller:'ChatCtrl'
+      controller:'ChatCtrl',
+      params: {
+        roomId:"0"  
+      }
     })
     ;
 $urlRouterProvider.otherwise("/login");

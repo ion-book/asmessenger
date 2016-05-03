@@ -1,5 +1,5 @@
 'Use Strict';
-angular.module('App').controller('ChatCtrl', function ($scope, Chats, $state) {
+angular.module('App').controller('ChatCtrl', function ($scope, Chats, $state, $localStorage) {
     console.log("Chat Controller initialized");
 
     $scope.IM = {
@@ -7,8 +7,8 @@ angular.module('App').controller('ChatCtrl', function ($scope, Chats, $state) {
     };
 
     Chats.selectRoom($state.params.roomId);
-    console.log($state.data);
     console.log($state.params.roomId);
+    console.log($localStorage.email);
 
     var roomName = Chats.getSelectedRoomName();
 
@@ -20,7 +20,11 @@ angular.module('App').controller('ChatCtrl', function ($scope, Chats, $state) {
 
     $scope.sendMessage = function (msg) {
         console.log(msg);
-        Chats.send($scope.displayName, msg);
+        from = {
+                    displayName: $localStorage.email
+                };
+        Chats.send(from, msg);
+        //Chats.send($scope.displayName, msg);
         $scope.IM.textMessage = "";
     }
 

@@ -1,5 +1,5 @@
 angular.module('App')
-.factory('Chats', function ($firebase, Rooms, FURL) {
+.factory('Chats', function ($firebase, $firebaseArray, Rooms, FURL) {
 
     var selectedRoomId;
 
@@ -27,6 +27,7 @@ angular.module('App')
             var selectedRoom;
             if (selectedRoomId && selectedRoomId != null) {
                 selectedRoom = Rooms.get(selectedRoomId);
+                console.log("Selected Room: " + selectedRoom);
                 if (selectedRoom)
                     return selectedRoom.name;
                 else
@@ -38,10 +39,15 @@ angular.module('App')
             console.log("selecting the room with id: " + roomId);
             selectedRoomId = roomId;
             if (!isNaN(roomId)) {
-                chats = $firebase(ref.child('rooms').child(selectedRoomId).child('chats')).$asArray();
+                chats = $firebaseArray(ref.child('rooms').child(selectedRoomId).child('chats'));
             }
         },
         send: function (from, message) {
+            if(angular.isUndefined(from)){
+                from = {
+                    displayName: "Default"
+                };
+            }
             console.log("sending message from :" + from.displayName + " & message is " + message);
             if (from && message) {
                 var chatMessage = {
