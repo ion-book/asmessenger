@@ -19,14 +19,19 @@ $stateProvider
     })
     .state('home', {
       url: '/home',
-      templateUrl: 'views/home/home.html',
-      controller:'homeController'
+      templateUrl: 'views/room/room.html',
+      controller:'RoomsCtrl'
+    })
+    .state('chat', {
+      url: '/chat',
+      templateUrl: 'views/chat/chat.html',
+      controller:'ChatCtrl'
     })
     ;
 $urlRouterProvider.otherwise("/login");
 })
 // Changue this for your Firebase App URL.
-.constant('FURL', 'https://asfirebase.firebaseio.com/')
+.constant('FURL', 'https://asmessenger.firebaseio.com/')
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
